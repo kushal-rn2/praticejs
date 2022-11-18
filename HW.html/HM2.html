@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML JAVASCRIPT</title>
+</head>
+
+<body>
+    <input type="text" id="todo-title" name="todo-title" />
+
+    <button onclick="addTodo()">Click Me</button>
+    <div id="ShowtodoList"></div>
+
+</body>
+<script>
+
+    let todos = ["Fruits", "Phones", "Goods"];
+    render();
+    function render() {
+        todos.forEach(function (todo) {
+            let todoCreate = document.createElement("div");
+            todoCreate.innerText = todo;
+            let targetDiv = document.getElementById("ShowtodoList");
+            targetDiv.appendChild(todoCreate);
+        });
+
+    }
+    function ClearTodos() {
+        document.getElementById("ShowtodoList").innerHTML = '';
+    }
+    function addTodo() {
+        let getInput = document.getElementById("todo-title");
+        let newTodo = getInput.value;
+        todos.push(newTodo);
+        getInput.value = '';
+        ClearTodos();
+        render();
+
+    }
+
+</script>
+
+</html>

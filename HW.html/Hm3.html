@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML JAVASCRIPT</title>
+</head>
+
+<body>
+    <input type="text" id="todo-title" name="todo-title" />
+    <input type="date" id="todo-date" name="todo-date" />
+    <button onclick="addTodo()">Click Me</button>
+    <div id="ShowtodoList"></div>
+</body>
+<script>
+    let todos = [
+        { id: "d100", todoTitle: "Fruits", todoDate: "2022-10-11" },
+        { id: "d200", todoTitle: "Phones", todoDate: "2022-10-12" },
+        { id: "d300", todoTitle: "Goods", todoDate: "2022-10-13" },
+    ];
+    render();
+    function tododelete(event) {
+        console.log(event.target.id)
+    }
+    function render() {
+        todos.forEach(function (todo) {
+            let todoCreate = document.createElement("div");
+            todoCreate.innerText = todo.id + ' ' + todo.todoTitle + ' ' + todo.todoDate;
+
+            let todoDeleteButton = document.createElement("button");
+            todoDeleteButton.innerText = "Delete";
+            todoDeleteButton.style = "margin-left:10px;";
+            todoDeleteButton.onclick = tododelete;
+            todoDeleteButton.id = todo.id;
+            todoCreate.appendChild(todoDeleteButton);
+
+            let targetDiv = document.getElementById("ShowtodoList");
+            targetDiv.appendChild(todoCreate);
+        });
+    }
+    function ClearTodos() {
+        document.getElementById("ShowtodoList").innerHTML = "";
+    }
+    function addTodo() {
+        let getInput = document.getElementById("todo-title");
+        let todoTitle = getInput.value;
+
+        let getDate = document.getElementById("todo-date");
+        todoDate = getDate.value;
+        let id = 'd' + new Date().getTime();
+        let newTodo = {
+            todoTitle: todoTitle,
+            todoDate: todoDate,
+            id
+        }
+        if (todoTitle != '' && todoDate != '') {
+            todos.push(newTodo);
+            getInput.value = "";
+            ClearTodos();
+            render();
+        }
+
+    }
+</script>
+
+</html>
